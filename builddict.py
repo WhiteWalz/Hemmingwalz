@@ -8,6 +8,11 @@ def addPadding(ngram, line):
     for i in range(ngram) - 1: startarr.append("<START>")
     return (startarr.extend(line)).extend(endarr)
 
+def createngrams(length, paddedline):
+    ngrams = []
+    for i in range(len(paddedline) - (length + 1)):
+        ngrams.append(paddedline[i:i+length])
+    return ngrams
 
 
 
