@@ -19,9 +19,23 @@ def createProbDict(fname):
         return
     con = sqlite3.connect(fname)
     cur = con.cursor()
-    cur.execute('''CREATE TABLE probabilities (primary text, secondary text, probability real)''')
+    cur.execute('''CREATE TABLE probabilities (primary text, secondary text, length real, probability real)''')
     con.commit()
     con.close()
+
+def addToProbdict(ngram, fname):
+    if not fname in os.listdir(): createProbDict(fname)
+    con = sqlite3.connect(fname)
+    cur = con.cursor()
+    cur.execute('''SELECT length FROM probabilities WHERE length=? AND primary=? AND secondary=?''', (len(ngram), ngram[:-1], ngram[-1]))
+    existingEntry = cur.fetchone()
+    if not existingEntry:
+        #create new entry for ngram in db
+
+        return
+    #increment current entry in database
+    
+    return
 
 def run():
     return
